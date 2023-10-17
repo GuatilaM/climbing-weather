@@ -1,0 +1,11 @@
+ul {
+    list-style: none;
+}
+
+.li-inactive {
+    background-color: aliceblue;
+}
+
+.li-active {
+    background-color: brown;
+}

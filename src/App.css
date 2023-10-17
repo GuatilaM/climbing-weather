@@ -1,0 +1,16 @@
+.container {
+  max-width: 1080px;
+  margin: 20px auto;
+}
+
+ol {
+  list-style: none;
+}
+
+.flex-li {
+  display: flex;
+}
+
+.fli-content {
+  margin: auto;
+} 
