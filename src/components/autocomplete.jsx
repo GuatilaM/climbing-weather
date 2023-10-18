@@ -47,7 +47,15 @@ function Autocomplete() {
 
     const getCities = useCallback(async () => {
         const cityInput = state.debouncedInput;
-        if (cityInput === ''){return;}
+        if (cityInput === ''){
+            setState({
+                ...state,
+                activeSuggestion: 0,
+                filteredSuggestions: [],
+                showSuggestions: false,
+            });
+            return;
+        }
 
         const url = `https://wft-geo-db.p.rapidapi.com/v1/geo/cities?namePrefix=${cityInput}&sort=-population&minPopulation=1000`;
         const options = {
