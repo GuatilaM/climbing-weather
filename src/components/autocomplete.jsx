@@ -83,7 +83,14 @@ function Autocomplete() {
             }
             const suggestions = await response.json();
             console.log(suggestions);
-            const names = suggestions.data.map((cityInfo) => cityInfo.name);
+            // const names = suggestions.data.map((cityInfo) => cityInfo.name);
+            const names = suggestions.data.map((cityInfo) => {
+                return ({
+                    name: cityInfo.name,
+                    latitude: cityInfo.latitude,
+                    longitude: cityInfo.longitude
+                });
+            });
             //   updateSuggestions(cityInput, names);
             setState({
                 ...state,
@@ -156,7 +163,7 @@ function Autocomplete() {
                 ...state,
                 activeSuggestion: 0,
                 showSuggestions: false,
-                userInput: filteredSuggestions[activeSuggestion]
+                userInput: filteredSuggestions[activeSuggestion].name
             });
             setSelected(true);
         }
@@ -245,8 +252,15 @@ function SuggestionsList({ state, handleClick }) {
                         if (index === state.activeSuggestion) {
                             liClass = 'li-active';
                         }
+                        // return (
+                        //     <li key={index} className={liClass} onClick={handleClick}>{suggestion}</li>
+                        // );
                         return (
-                            <li key={index} className={liClass} onClick={handleClick}>{suggestion}</li>
+                            <li 
+                                key={index} 
+                                className={liClass}
+                                onClick={handleClick}
+                            >{suggestion.name}</li>
                         );
                     })}
                 </ul>
