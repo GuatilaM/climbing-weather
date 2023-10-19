@@ -12,6 +12,13 @@ import './autocomplete.css';
 //     }
 // }
 // getEggs();
+// function debounce(funct, debounceTime = 600) {
+//         let timer;
+//         return (...args) => {
+//             clearTimeout(timer);
+//             timer = setTimeout(() => funct.apply(this, args), debounceTime);
+//         };
+//     }
 
 function Autocomplete() {
 
@@ -23,6 +30,8 @@ function Autocomplete() {
         debouncedInput: ''
     });
 
+    const [selected, setSelected] = useState(false);
+
     // const suggestions = ['Bogota', 'Cali', 'Buenaventura', 'Medellin', 'Leticia', 'Suesca'];
 
     // const handleChange = debounce((event) => getCities(event));
@@ -32,6 +41,7 @@ function Autocomplete() {
             ...state,
             userInput: event.target.value
         });
+        setSelected(false);
     }
 
     // Debounce user input change
@@ -88,16 +98,9 @@ function Autocomplete() {
 
     // Make calls to GeoDB API on debounced input change
     useEffect(() => {
+        if (selected){return;}
         getCities();
     }, [state.debouncedInput]);
-
-    function debounce(funct, debounceTime = 600) {
-        let timer;
-        return (...args) => {
-            clearTimeout(timer);
-            timer = setTimeout(() => funct.apply(this, args), debounceTime);
-        };
-    }
 
     // async function getCities(event) {
     //     const cityInput = event.target.value;
@@ -137,21 +140,25 @@ function Autocomplete() {
 
     function updateInput(event) {
         setState({
+            ...state,
             activeSuggestion: 0,
             filteredSuggestions: [],
             showSuggestions: false,
-            userInput: event.target.value
+            userInput: event.target.innerHTML
         });
+        setSelected(true);
     }
 
     function updateActiveSuggestion(event) {
         const { activeSuggestion, filteredSuggestions } = state;
         if (event.key === 'Enter') {
             setState({
+                ...state,
                 activeSuggestion: 0,
                 showSuggestions: false,
                 userInput: filteredSuggestions[activeSuggestion]
             });
+            setSelected(true);
         }
 
         else if (event.key === 'ArrowUp') {
@@ -188,14 +195,15 @@ function Autocomplete() {
             /> */}
             <TextInput
                 handleChange={updateUserInput}
+                handleKeyDown={updateActiveSuggestion}
                 inputVal={state.userInput}
             />
-            <SuggestionsList state={state} />
+            <SuggestionsList state={state} handleClick={updateInput} />
         </div>
     );
 }
 
-function TextInput({ handleChange, inputVal }) {
+function TextInput({ handleChange, handleKeyDown, inputVal }) {
     // const [inputVal, setInputVal] = useState('');
     // const [debouncedVal, setDebouncedVal] = useState('');
 
@@ -220,13 +228,14 @@ function TextInput({ handleChange, inputVal }) {
                 id="autocomplete-city"
                 type="text"
                 onChange={handleChange}
+                onKeyDown={handleKeyDown}
                 value={inputVal}
             />
         </div>
     );
 }
 
-function SuggestionsList({ state }) {
+function SuggestionsList({ state, handleClick }) {
     if (state.showSuggestions && state.userInput) {
         if (state.filteredSuggestions.length) {
             return (
@@ -237,7 +246,7 @@ function SuggestionsList({ state }) {
                             liClass = 'li-active';
                         }
                         return (
-                            <li key={index} className={liClass}>{suggestion}</li>
+                            <li key={index} className={liClass} onClick={handleClick}>{suggestion}</li>
                         );
                     })}
                 </ul>
