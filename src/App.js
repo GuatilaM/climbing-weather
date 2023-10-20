@@ -35,6 +35,10 @@ function convertTime(unixTime) {
 
 function App() {
   const [climateData, setClimateData] = useState({});
+  const [coordinates, setCoordinates] = useState({
+    latitude: '',
+    longitude: ''
+  });
 
   async function getClimate() {
     let latitude = document.querySelector('#i-lat').value;
@@ -64,9 +68,16 @@ function App() {
     }
   }
 
+  function handleSelected(city){
+    setCoordinates({
+      latitude: city.latitude.toString(),
+      longitude: city.longitude.toString()
+    });
+  }
+
   return (
     <div className='container'>
-      <Autocomplete />
+      <Autocomplete onSelected={handleSelected} />
       <LocationInput />
       <button onClick={getClimate}>API</button>
       <ol>

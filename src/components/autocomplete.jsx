@@ -20,7 +20,7 @@ import './autocomplete.css';
 //         };
 //     }
 
-function Autocomplete() {
+function Autocomplete({ onSelected }) {
 
     const [state, setState] = useState({
         activeSuggestion: 0,
@@ -105,7 +105,10 @@ function Autocomplete() {
 
     // Make calls to GeoDB API on debounced input change
     useEffect(() => {
-        if (selected){return;}
+        if (selected){
+            console.log(state.filteredSuggestions);
+            return;
+        }
         getCities();
     }, [state.debouncedInput]);
 
@@ -133,27 +136,24 @@ function Autocomplete() {
     //     }
     // }
 
-    function updateSuggestions(input, suggestions) {
-        // const filtered = suggestions.filter(
-        //     suggestion => suggestion.toLowerCase().indexOf(input.toLowerCase()) > -1
-        // );
-        setState({
-            activeSuggestion: 0,
-            filteredSuggestions: suggestions,
-            showSuggestions: true,
-            userInput: input
-        })
-    }
-
     function updateInput(event) {
+        const suggestions = state.filteredSuggestions;
+        let clickedSuggestion;
+
+        for (let city in suggestions){
+            if (suggestions[city].name === event.target.innerHTML){
+                clickedSuggestion = suggestions[city];
+            } 
+        }
         setState({
             ...state,
             activeSuggestion: 0,
-            filteredSuggestions: [],
+            filteredSuggestions: clickedSuggestion,
             showSuggestions: false,
             userInput: event.target.innerHTML
         });
         setSelected(true);
+        onSelected(clickedSuggestion);
     }
 
     function updateActiveSuggestion(event) {
@@ -162,10 +162,12 @@ function Autocomplete() {
             setState({
                 ...state,
                 activeSuggestion: 0,
+                filteredSuggestions: filteredSuggestions[activeSuggestion],
                 showSuggestions: false,
                 userInput: filteredSuggestions[activeSuggestion].name
             });
             setSelected(true);
+            onSelected(filteredSuggestions[activeSuggestion]);
         }
 
         else if (event.key === 'ArrowUp') {
@@ -191,15 +193,6 @@ function Autocomplete() {
 
     return (
         <div>
-            {/* <label htmlFor="autocomplete-city">City: </label>
-            <input 
-                id="autocomplete-city"
-                type="text" 
-                onChange={handleChange}
-                onClick={updateInput}
-                onKeyDown={updateActiveSuggestion}
-                // value={state.userInput}
-            /> */}
             <TextInput
                 handleChange={updateUserInput}
                 handleKeyDown={updateActiveSuggestion}
@@ -211,23 +204,6 @@ function Autocomplete() {
 }
 
 function TextInput({ handleChange, handleKeyDown, inputVal }) {
-    // const [inputVal, setInputVal] = useState('');
-    // const [debouncedVal, setDebouncedVal] = useState('');
-
-    // function handleChange(event){
-    //     setInputVal(event.target.value);
-    // }
-
-    // Called whenever inputVal changes
-    // useEffect(() => {
-    //     const timeout = setTimeout(() => {
-    //         setDebouncedVal(inputVal);
-    //     }, 600);
-    //     return () => clearTimeout(timeout);
-    // }, [inputVal]);
-
-    // useEffect(() => console.log(debouncedVal), [debouncedVal]);
-
     return (
         <div>
             <label htmlFor="autocomplete-city">City: </label>
