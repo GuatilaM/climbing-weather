@@ -41,8 +41,10 @@ function App() {
   });
 
   async function getClimate() {
-    let latitude = document.querySelector('#i-lat').value;
-    let longitude = document.querySelector('#i-lon').value;
+    // let latitude = document.querySelector('#i-lat').value;
+    // let longitude = document.querySelector('#i-lon').value;
+    let latitude = coordinates.latitude;
+    let longitude = coordinates.longitude;
 
     if (latitude === '' || longitude === '') {
       latitude = '4.6535';
