@@ -14,17 +14,6 @@ const apiKey = 'b3622430eaf3b0fc6b012611a087d72f';
 //     .catch(err => console.error(err));
 // }
 
-function convertTime(unixTime) {
-  const dateObj = new Date(unixTime * 1000);
-  // const utcString = dateObj.toUTCString();
-  const localeString = dateObj.toLocaleString(
-    'en-US',
-    { timeZone: 'America/Bogota' }
-  );
-  // return utcString;
-  return localeString;
-}
-
 // function climateListItems(data){
 //   let climateBuffer = [];
 //   for (let i in data.list){
@@ -35,14 +24,52 @@ function convertTime(unixTime) {
 
 function App() {
   const [climateData, setClimateData] = useState({});
+
+  return (
+    <div className='container'>
+      <ClimateForm handleResponse={(climate) => setClimateData(climate)} />
+      <ol>
+        <ClimateItem climData={climateData} />
+      </ol>
+    </div>
+  );
+}
+
+function ClimateForm({ handleResponse }){
   const [coordinates, setCoordinates] = useState({
     latitude: '',
     longitude: ''
   });
 
+  function handleSelected(city){
+    setCoordinates({
+      latitude: city.latitude.toString(),
+      longitude: city.longitude.toString()
+    });
+  }
+
+  function handleSubmit(event){
+    // Don't submit yet
+    event.preventDefault();
+    getClimate();
+  }
+
+  function updateCoordinates(event, name){
+    if (name === 'latitude'){
+      setCoordinates({
+        ...coordinates,
+        latitude: event.target.value
+      });
+    }
+    else if (name === 'longitude'){
+      setCoordinates({
+        ...coordinates,
+        longitude: event.target.value
+      });
+    }
+  }
+
   async function getClimate() {
-    // let latitude = document.querySelector('#i-lat').value;
-    // let longitude = document.querySelector('#i-lon').value;
     let latitude = coordinates.latitude;
     let longitude = coordinates.longitude;
 
@@ -63,46 +90,29 @@ function App() {
         throw new Error(climate.message);
       } else {
         console.log(climate);
-        setClimateData(climate);
+        handleResponse(climate);
       }
     } catch (error) {
       console.log(error);
     }
   }
 
-  function handleSelected(city){
-    setCoordinates({
-      latitude: city.latitude.toString(),
-      longitude: city.longitude.toString()
-    });
-  }
-
-  function handleSubmit(event){
-    event.preventDefault();
-    getClimate();
-  }
-
-  return (
-    <div className='container'>
-      <form action="" onSubmit={handleSubmit} >
+  return(
+    <form action="" onSubmit={handleSubmit} >
         <Autocomplete onSelected={handleSelected} />
-      </form>
-      <LocationInput />
-      <button onClick={getClimate}>API</button>
-      <ol>
-        <ClimateItem climData={climateData} />
-      </ol>
-    </div>
+        <LocationInput handleChange={updateCoordinates} />
+        <button type='submit'>Search</button>
+    </form>
   );
 }
 
-function LocationInput() {
+function LocationInput({ handleChange }) {
   return (
     <div>
       <label htmlFor="i-lat">Latitude: </label>
-      <input id='i-lat' type="text" />
+      <input id='i-lat' type="text" name='latitude' onChange={(event) => handleChange(event, 'latitude')} />
       <label htmlFor="i-lon">Longitude: </label>
-      <input id='i-lon' type="text" />
+      <input id='i-lon' type="text" name='longitude' onChange={(event) => handleChange(event, 'longitude')}/>
     </div>
   );
 }
@@ -122,6 +132,17 @@ function ClimateItem({ climData }) {
     )
   }
   return (climateBuffer);
+}
+
+function convertTime(unixTime) {
+  const dateObj = new Date(unixTime * 1000);
+  // const utcString = dateObj.toUTCString();
+  const localeString = dateObj.toLocaleString(
+    'en-US',
+    { timeZone: 'America/Bogota' }
+  );
+  // return utcString;
+  return localeString;
 }
 
 export default App;

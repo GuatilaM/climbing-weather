@@ -210,7 +210,7 @@ function TextInput({ handleChange, handleKeyDown, inputVal }) {
             <input
                 id="autocomplete-city"
                 type="text"
-                autoComplete="false"
+                autoComplete="off"
                 onChange={handleChange}
                 onKeyDown={handleKeyDown}
                 value={inputVal}
