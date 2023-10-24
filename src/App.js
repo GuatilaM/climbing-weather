@@ -77,9 +77,16 @@ function App() {
     });
   }
 
+  function handleSubmit(event){
+    event.preventDefault();
+    getClimate();
+  }
+
   return (
     <div className='container'>
-      <Autocomplete onSelected={handleSelected} />
+      <form action="" onSubmit={handleSubmit} >
+        <Autocomplete onSelected={handleSelected} />
+      </form>
       <LocationInput />
       <button onClick={getClimate}>API</button>
       <ol>
