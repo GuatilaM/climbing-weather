@@ -11,7 +11,7 @@ function ClimateItem({ climData }) {
                 <div className='fli-content'>
                     <p>Temp: {cdList[i].main.temp}</p>
                 </div>
-                <p className='fli-content'>Precipitation: {cdList[i].pop * 100}%</p>
+                <p className='fli-content'>Precipitation: {Math.floor(cdList[i].pop * 100)}%</p>
                 <p className="fli-content">Rating: {rateClimate(cdList[i])}</p>
             </li>
         )
@@ -38,7 +38,7 @@ function rateClimate(data) {
     const temp = data.main.temp;
     const windSpeed = data.wind.speed;
     const humidity = data.main.humidity;
-    // const snow = data.list.snow ? data.list.snow.3h : 0;
+    const snow = data.snow ? data.snow : 0;
     // Invert probability of precipitation, less is better
     let popRating = percentageToRating((pop * -100) + 100);
     let cloudinessRating = percentageToRating(cloudiness);
@@ -46,20 +46,22 @@ function rateClimate(data) {
     let windSpeedRating = windToRating(windSpeed);
     //Invert humidity so that less humidity is better
     let humidityRating = percentageToRating((humidity * -1) + 100);
+    let snowRating = snow ? 1 : 10;
 
     const ratings = [
         popRating,
         cloudinessRating,
         tempRating,
         windSpeedRating,
-        humidityRating
+        humidityRating,
+        snowRating
     ];
     let ratingSum = 0;
     for (let i in ratings){
         ratingSum += ratings[i];
     }
     let meanRating = ratingSum / ratings.length;
-    return meanRating;
+    return meanRating.toFixed(1);
 }
 
 function percentageToRating(percentage){
