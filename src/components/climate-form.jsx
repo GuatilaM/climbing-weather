@@ -46,13 +46,15 @@ function ClimateForm({ handleResponse }) {
         }
 
         const apiKey = 'b3622430eaf3b0fc6b012611a087d72f';
-        const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKey}`;
+        const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKey}`;
         const options = {
             mode: 'cors'
         }
 
+        const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKey}`;
+
         try {
-            const response = await fetch(url, options);
+            const response = await fetch(forecastUrl, options);
             const climate = await response.json();
             if (climate.cod !== '200') {
                 throw new Error(climate.message);
