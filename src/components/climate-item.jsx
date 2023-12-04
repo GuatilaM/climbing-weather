@@ -1,4 +1,4 @@
-import rateClimate from "../utils/rate-climate";
+import {rateClimate, Climate} from "../utils/rate-climate";
 
 export default function ClimateItem({ climData }) {
     const cdList = climData.list ? climData.list : null;
@@ -7,6 +7,7 @@ export default function ClimateItem({ climData }) {
         return [];
     }
     for (let i in cdList) {
+        // const climate = new Climate(cdList[i]);
         climateBuffer.push(
             <li key={i} className='flex-li'>
                 <h5 className='fli-content'>{convertTime(cdList[i].dt)}</h5>
@@ -15,6 +16,7 @@ export default function ClimateItem({ climData }) {
                 </div>
                 <p className='fli-content'>Precipitation: {Math.floor(cdList[i].pop * 100)}%</p>
                 <p className="fli-content">Rating: {rateClimate(cdList[i])}</p>
+                {/* <p className="fli-content">Rating: {climate.rate()}</p> */}
             </li>
         )
         // rateClimate(cdList[i]);
