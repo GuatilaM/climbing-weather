@@ -1,0 +1,22 @@
+.suggestions-list {
+    list-style: none;
+}
+
+.suggestions-list li {
+    height: 69px;
+    padding: 21px 20px;
+}
+
+.suggestions-list li:nth-last-child(1) {
+    border-radius: 0px 0px 5px 5px;
+}
+
+.sl-inactive {
+    background-color: var(--light-background);
+    color: var(--text-primary-light);
+}
+
+.sl-active {
+    background-color: var(--primary-light);
+    color: var(--text-primary-darker);
+}

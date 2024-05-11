@@ -1,0 +1,20 @@
+:root {
+    /* Color styles */
+    --background: hsla(229, 12.4%, 17.5%, 1);
+    --light-background: hsla(240, 100%, 99.4%, 1);
+    --dark: hsla(0, 0%, 0%, 1);
+    --primary-light: hsla(229, 100%, 89.4%, 1);
+    --primary-darker: hsla(229, 59.8%, 60%, 1);
+    --text-primary-light: hsla(230, 17.6%, 39%, 1);
+    --text-primary-darker: hsla(229, 46.4%, 32.9%, 1);
+    --ranking-10: hsla(192, 100%, 78%, 1);
+    --ranking-9: hsla(210, 100%, 75.1%, 1);
+    --ranking-8: hsla(225, 100%, 72.2%, 1);
+    --ranking-7: hsla(230, 100%, 69.2%, 1);
+    --ranking-6: hsla(235, 100%, 66.3%, 1);
+    --ranking-5: hsla(240, 37.4%, 48.2%, 1);
+    --ranking-4: hsla(240, 34.3%, 42.4%, 1);
+    --ranking-3: hsla(243, 32.2%, 35.9%, 1);
+    --ranking-2: hsla(330, 8.2%, 33.3%, 1);
+    --ranking-1: hsla(15, 60.5%, 52.4%, 1);
+}

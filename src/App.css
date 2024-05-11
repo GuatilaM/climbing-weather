@@ -1,4 +1,15 @@
-.container {
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import url(./css/reset.css);
+@import url(./css/color-palette.css);
+@import url(./css/typography.css);
+@import url(./css/elements/container.css);
+@import url(./css/elements/searchbar.css);
+@import url(./css/elements/welcome.css);
+@import url(./css/elements/suggestions-list.css);
+
+
+
+/* .container {
   max-width: 1080px;
   margin: 20px auto;
 }
@@ -13,4 +24,4 @@ ol {
 
 .fli-content {
   margin: auto;
-} 
+}  */
