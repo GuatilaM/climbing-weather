@@ -5,15 +5,20 @@ import ClimateItem from './components/climate-item';
 import Welcome from './components/welcome';
 
 function App() {
-  const [climateData, setClimateData] = useState({});
+  const [forecastData, setForecastData] = useState({});
+  const [weatherData, setWeatherData] = useState({});
   const [isSearchFocus, setIsSearchFocus] = useState(false);
 
   return (
     <div className='container'>
-      <ClimateForm handleResponse={(climate) => setClimateData(climate)} handleFocus={() => {setIsSearchFocus(true)}} />
+      <ClimateForm 
+        handleForecastResponse={(forecast) => setForecastData(forecast)} 
+        handleWeatherResponse={(weather) => setWeatherData(weather)}
+        handleFocus={() => {setIsSearchFocus(true)}} 
+      />
       <Welcome hide={isSearchFocus} />
       <ol>
-        <ClimateItem climData={climateData} />
+        <ClimateItem climData={forecastData} />
       </ol>
     </div>
   );
