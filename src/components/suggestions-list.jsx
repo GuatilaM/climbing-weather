@@ -1,4 +1,4 @@
-function SuggestionsList({ state, handleClick }) {
+function SuggestionsList({ state, handleClick, handleMouseEnter }) {
     if (state.showSuggestions && state.userInput) {
         if (state.filteredSuggestions.length) {
             return (
@@ -12,7 +12,9 @@ function SuggestionsList({ state, handleClick }) {
                         return (
                             <li
                                 key={index}
+                                id={index}
                                 className={liClass}
+                                onMouseEnter={handleMouseEnter}
                                 onClick={handleClick}
                             >{suggestion.name}</li>
                         );

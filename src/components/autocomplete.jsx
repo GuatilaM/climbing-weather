@@ -145,6 +145,15 @@ function Autocomplete({ onSelected, handleFocusAut }) {
         }
     }
 
+    function updateMouseEnter(event){
+        // handles hovering over a suggestion
+        const targetId = parseInt(event.target.attributes.id.value, 10);
+        setState({
+            ...state,
+            activeSuggestion: targetId 
+        });
+    }
+
     return (
         <div>
             <TextInput
@@ -152,8 +161,13 @@ function Autocomplete({ onSelected, handleFocusAut }) {
                 handleKeyDown={updateActiveSuggestion}
                 handleFocusText={handleFocusAut}
                 inputVal={state.userInput}
+                state={state}
             />
-            <SuggestionsList state={state} handleClick={updateInput} />
+            <SuggestionsList 
+                state={state} 
+                handleClick={updateInput} 
+                handleMouseEnter={updateMouseEnter}
+            />
         </div>
     );
 }

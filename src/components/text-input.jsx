@@ -1,6 +1,19 @@
-function TextInput({ handleChange, handleKeyDown, handleFocusText, inputVal }) {
+function TextInput({ 
+    handleChange, 
+    handleKeyDown, 
+    handleFocusText, 
+    inputVal, 
+    state 
+}) {
+    // Check if SuggestionsList is active (same method as in the component)
+    let divClass = 'searchbar';
+    if (state.showSuggestions && state.userInput) {
+        if (state.filteredSuggestions.length) {
+            divClass = 'searchbar-sl';
+        }
+    }
     return (
-        <div className="searchbar">
+        <div className={divClass}>
             <label htmlFor="autocomplete-city" hidden={true}>City: </label>
             <svg width={24} height={25} viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
