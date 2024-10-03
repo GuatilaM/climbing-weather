@@ -14,7 +14,8 @@ function App() {
       <ClimateForm 
         handleForecastResponse={(forecast) => setForecastData(forecast)} 
         handleWeatherResponse={(weather) => setWeatherData(weather)}
-        handleFocus={() => {setIsSearchFocus(true)}} 
+        handleFocus={() => {setIsSearchFocus(true)}}
+        handleBlur={() => {setIsSearchFocus(false)}} 
       />
       <Welcome hide={isSearchFocus} />
       <ol>

@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import TextInput from "./text-input";
 import SuggestionsList from "./suggestions-list"
 
-function Autocomplete({ onSelected, handleFocusAut }) {
+function Autocomplete({ onSelected, handleFocusAut, handleBlurAut }) {
 
     const [state, setState] = useState({
         activeSuggestion: 0,
@@ -160,6 +160,7 @@ function Autocomplete({ onSelected, handleFocusAut }) {
                 handleChange={updateUserInput}
                 handleKeyDown={updateActiveSuggestion}
                 handleFocusText={handleFocusAut}
+                handleBlurText={handleBlurAut}
                 inputVal={state.userInput}
                 state={state}
             />

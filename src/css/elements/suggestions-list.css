@@ -1,5 +1,8 @@
 .suggestions-list {
     list-style: none;
+    position: absolute;
+    width: 484px;
+    z-index: 1;
 }
 
 .suggestions-list li {
