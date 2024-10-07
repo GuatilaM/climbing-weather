@@ -4,8 +4,7 @@ import LocationInput from "./location-input";
 
 function ClimateForm({ 
     handleForecastResponse, 
-    handleWeatherResponse, 
-    handleFocus, handleBlur 
+    handleWeatherResponse, handleSuggestionActive 
 }) {
     const [coordinates, setCoordinates] = useState({
         latitude: '',
@@ -101,7 +100,7 @@ function ClimateForm({
 
     return (
         <form action="" onSubmit={handleSubmit} >
-            <Autocomplete onSelected={handleSelected} handleFocusAut={handleFocus} handleBlurAut={handleBlur} />
+            <Autocomplete onSelected={handleSelected} handleSuggestionListActive={handleSuggestionActive} />
             <LocationInput handleChange={updateCoordinates} />
             <button type='submit' hidden={true}>Search</button>
         </form>

@@ -1,8 +1,6 @@
 function TextInput({ 
     handleChange, 
-    handleKeyDown, 
-    handleFocusText,
-    handleBlurText, 
+    handleKeyDown,  
     inputVal, 
     state 
 }) {
@@ -30,8 +28,6 @@ function TextInput({
                 autoComplete="off"
                 onChange={handleChange}
                 onKeyDown={handleKeyDown}
-                onFocus={handleFocusText}
-                onBlur={handleBlurText}
                 value={inputVal}
             />
         </div>

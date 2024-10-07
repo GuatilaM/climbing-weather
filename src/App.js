@@ -7,17 +7,16 @@ import Welcome from './components/welcome';
 function App() {
   const [forecastData, setForecastData] = useState({});
   const [weatherData, setWeatherData] = useState({});
-  const [isSearchFocus, setIsSearchFocus] = useState(false);
+  const [isSuggestionActive, setIsSuggestionActive] = useState(false);
 
   return (
     <div className='container'>
       <ClimateForm 
         handleForecastResponse={(forecast) => setForecastData(forecast)} 
-        handleWeatherResponse={(weather) => setWeatherData(weather)}
-        handleFocus={() => {setIsSearchFocus(true)}}
-        handleBlur={() => {setIsSearchFocus(false)}} 
+        handleWeatherResponse={(weather) => setWeatherData(weather)} 
+        handleSuggestionActive={(isActive) => {setIsSuggestionActive(isActive)}}
       />
-      <Welcome hide={isSearchFocus} />
+      <Welcome hide={isSuggestionActive} />
       <ol>
         <ClimateItem climData={forecastData} />
       </ol>

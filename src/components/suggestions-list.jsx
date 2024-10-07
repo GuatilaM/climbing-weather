@@ -1,6 +1,9 @@
-function SuggestionsList({ state, handleClick, handleMouseEnter }) {
+function SuggestionsList({ state, handleClick, handleMouseEnter, handleSuggestionActive }) {
+    let isActive;
     if (state.showSuggestions && state.userInput) {
         if (state.filteredSuggestions.length) {
+            isActive = true;
+            handleSuggestionActive(isActive);
             return (
                 <ul className="suggestions-list">
                     {state.filteredSuggestions.map((suggestion, index) => {
@@ -22,6 +25,9 @@ function SuggestionsList({ state, handleClick, handleMouseEnter }) {
                 </ul>
             );
         }
+    } else {
+        isActive = false;
+        handleSuggestionActive(isActive);
     }
 }
 
