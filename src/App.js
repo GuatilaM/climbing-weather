@@ -3,6 +3,7 @@ import './App.css';
 import ClimateForm from './components/climate-form';
 import ClimateItem from './components/climate-item';
 import Welcome from './components/welcome';
+import Logo from './components/logo';
 
 function App() {
   const [forecastData, setForecastData] = useState({});
@@ -11,6 +12,7 @@ function App() {
 
   return (
     <div className='container'>
+      <Logo />
       <ClimateForm 
         handleForecastResponse={(forecast) => setForecastData(forecast)} 
         handleWeatherResponse={(weather) => setWeatherData(weather)} 
