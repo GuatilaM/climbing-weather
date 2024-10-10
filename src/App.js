@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import './App.css';
-import ClimateForm from './components/climate-form';
-import ClimateItem from './components/climate-item';
-import Welcome from './components/welcome';
 import Logo from './components/logo';
+import ClimateForm from './components/climate-form';
+import Content from './components/content';
+import ClimateItem from './components/climate-item';
 
 function App() {
   const [forecastData, setForecastData] = useState({});
@@ -18,7 +18,7 @@ function App() {
         handleWeatherResponse={(weather) => setWeatherData(weather)} 
         handleSuggestionActive={(isActive) => {setIsSuggestionActive(isActive)}}
       />
-      <Welcome hide={isSuggestionActive} />
+      <Content hideWelcome={isSuggestionActive} climData={forecastData} /> 
       <ol>
         <ClimateItem climData={forecastData} />
       </ol>
