@@ -18,7 +18,11 @@ function App() {
         handleWeatherResponse={(weather) => setWeatherData(weather)} 
         handleSuggestionActive={(isActive) => {setIsSuggestionActive(isActive)}}
       />
-      <Content hideWelcome={isSuggestionActive} climData={forecastData} /> 
+      <Content 
+        hideWelcome={isSuggestionActive} 
+        climData={forecastData}
+        currentWeatherData={weatherData} 
+      /> 
       <ol>
         <ClimateItem climData={forecastData} />
       </ol>

@@ -91,7 +91,7 @@ function ClimateForm({
                 throw new Error(weather.message);
             } else {
                 console.log(weather);
-                handleWeatherResponse();
+                handleWeatherResponse(weather);
             }
         } catch (error){
             console.log(error);
