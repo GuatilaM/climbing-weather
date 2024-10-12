@@ -29,7 +29,7 @@ function TextInput({
                 onChange={handleChange}
                 onKeyDown={handleKeyDown}
                 value={inputVal}
-                autoFocus="true"
+                autoFocus={true}
             />
         </div>
     );

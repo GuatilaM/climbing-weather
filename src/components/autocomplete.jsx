@@ -15,6 +15,9 @@ function Autocomplete({ onSelected, handleSuggestionListActive }) {
     const [selected, setSelected] = useState(false);
 
     function updateUserInput(event) {
+        if (event.target.value === ''){
+            handleSuggestionListActive(false);
+        }
         setState({
             ...state,
             userInput: event.target.value
@@ -70,6 +73,7 @@ function Autocomplete({ onSelected, handleSuggestionListActive }) {
                 });
             });
             //   updateSuggestions(cityInput, names);
+            handleSuggestionListActive(true);
             setState({
                 ...state,
                 activeSuggestion: 0,
@@ -79,7 +83,7 @@ function Autocomplete({ onSelected, handleSuggestionListActive }) {
         } catch (error) {
             console.error('Something went wrong...', error);
         }
-    }, [state]);
+    }, [state, handleSuggestionListActive]);
 
     // Make calls to GeoDB API on debounced input change
     useEffect(() => {
@@ -88,7 +92,7 @@ function Autocomplete({ onSelected, handleSuggestionListActive }) {
             return;
         }
         getCities();
-    }, [state.debouncedInput]);
+    }, [state.debouncedInput, getCities, selected, state.filteredSuggestions]);
 
     function updateInput(event) {
         const suggestions = state.filteredSuggestions;
@@ -166,7 +170,6 @@ function Autocomplete({ onSelected, handleSuggestionListActive }) {
                 state={state} 
                 handleClick={updateInput} 
                 handleMouseEnter={updateMouseEnter}
-                handleSuggestionActive={handleSuggestionListActive}
             />
         </div>
     );
