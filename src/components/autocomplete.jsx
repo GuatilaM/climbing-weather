@@ -92,7 +92,7 @@ function Autocomplete({ onSelected, handleSuggestionListActive }) {
             return;
         }
         getCities();
-    }, [state.debouncedInput, getCities, selected, state.filteredSuggestions]);
+    }, [state.debouncedInput]);
 
     function updateInput(event) {
         const suggestions = state.filteredSuggestions;
