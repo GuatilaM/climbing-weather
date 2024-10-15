@@ -1,0 +1,6 @@
+.current-weather {
+    width: 1032px;
+    height: 264px;
+    background-color: var(--light-background);
+    border-radius: 10px;
+}
