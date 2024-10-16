@@ -3,4 +3,10 @@
     height: 264px;
     background-color: var(--light-background);
     border-radius: 10px;
+    color: var(--background);
+    padding: 30px;
+    display: grid;
+    grid-template-rows: 0.16fr auto;
+    grid-template-columns: 0.57fr auto;
 }
+

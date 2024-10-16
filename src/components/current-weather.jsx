@@ -1,7 +1,11 @@
 function CurrentWeather({main}) {
     return (
         <div className="current-weather">
-            <h1>{main.temp}</h1>
+            <h3 className="heading-3">Current weather</h3>
+            <div>
+                <div>general description</div>
+                <div>details</div>
+            </div>
         </div>
     );
 }
