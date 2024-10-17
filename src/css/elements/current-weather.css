@@ -13,7 +13,12 @@
     grid-area: 1 / 1 / 2 / 4;
 }
 
-.current-weather div {
-    grid-area: 2 / 1 / 7 / 4;
+#cw-general {
+    grid-area: 2 / 1 / 7 / 2;
+    justify-self: flex-start;
+    align-self: flex-end;
 }
 
+#cw-details {
+    grid-area: 2 / 2 / 7 / 4;
+}
