@@ -13,7 +13,7 @@ function Content({hideWelcome, climData, currentWeatherData}) {
     }
     return (
         <div>
-            <CurrentWeather main={wdMain} />
+            <CurrentWeather data={currentWeatherData} />
         </div>
     );
 }
