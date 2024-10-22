@@ -14,9 +14,25 @@
 }
 
 #cw-general {
+    display: grid;
     grid-area: 2 / 1 / 7 / 2;
-    justify-self: flex-start;
+    grid-template-rows: subgrid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 2%;
+}
+
+#cw-general > svg {
+    grid-area: 1 / 1 / 6 / 2;
     align-self: flex-end;
+}
+
+#cw-general > h1 {
+    grid-area: 3 / 2 / 5 / 3;
+    align-self: flex-end;
+}
+
+#cw-general > h2 {
+    grid-area: 5 / 2 / 6 / 3;
 }
 
 #cw-details {

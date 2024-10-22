@@ -6,6 +6,10 @@ function CurrentWeather({data}) {
             <h3 className="heading-3">Current weather</h3>
             <div id="cw-general">
                 <WeatherIcon icon={data.weather[0].icon} />
+                <h1 className="heading-1-regular">
+                    {Math.round(data.main.temp)}°
+                </h1>
+                <h2 className="heading-2">{data.weather[0].description}</h2>
             </div>
             <div id="cw-details">{data.weather[0].icon}</div>
         </div>
