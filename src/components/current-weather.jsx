@@ -1,4 +1,8 @@
 import WeatherIcon from "./weather-icon";
+import FeelsLike from "./feels-like";
+import Humidity from "./humidity";
+import Cloudiness from "./cloudiness";
+import WindSpeed from "./wind-speed";
 
 function CurrentWeather({data}) {
     return (
@@ -11,7 +15,12 @@ function CurrentWeather({data}) {
                 </h1>
                 <h2 className="heading-2">{data.weather[0].description}</h2>
             </div>
-            <div id="cw-details">{data.weather[0].icon}</div>
+            <div id="cw-details">
+                <FeelsLike data={data} />
+                <Cloudiness data={data} />
+                <Humidity data={data} />
+                <WindSpeed data={data} />
+            </div>
         </div>
     );
 }
