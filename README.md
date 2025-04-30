@@ -7,3 +7,9 @@ Built with React, JavaScript, and CSS. Queries the OpenWeatherMap API as well as
 ## Project Status
 
 This project is currently in development.
+
+## Project Screenshots
+
+![Climbing Weather home page](/assets/images/climbing-weather-home.png "Climbing Weather home page")
+
+![Climbing Weather query page](/assets/images/climbing-weather-query.png "Climbing Weather query page")
