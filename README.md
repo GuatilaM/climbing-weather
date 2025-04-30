@@ -1,6 +1,4 @@
-## Project Name & Pitch
-
-#### Climbing Weather
+## Climbing Weather
 
 An application that provides a weather forecast for a selected location plus a rating on how good the weather is to go rock climbing. 
 
