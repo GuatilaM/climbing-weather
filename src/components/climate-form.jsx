@@ -45,7 +45,7 @@ function ClimateForm({ handleResponse }) {
             longitude = '-74.0836';
         }
 
-        const apiKey = 'b3622430eaf3b0fc6b012611a087d72f';
+        const apiKey = '';
         const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKey}`;
         const options = {
             mode: 'cors'

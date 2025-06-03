@@ -50,7 +50,7 @@ function Autocomplete({ onSelected }) {
         const options = {
             method: 'GET',
             headers: {
-                'X-RapidAPI-Key': 'b41b6ed316msh1f1ef6714b5d239p14e412jsn027b91fe2679',
+                'X-RapidAPI-Key': '',
                 'X-RapidAPI-Host': 'wft-geo-db.p.rapidapi.com'
             }
         };
