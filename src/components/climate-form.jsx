@@ -11,7 +11,7 @@ function ClimateForm({
         longitude: ''
     });
 
-    const apiKey = 'b3622430eaf3b0fc6b012611a087d72f';
+    const apiKey = '';
 
     function handleSelected(city) {
         setCoordinates({
