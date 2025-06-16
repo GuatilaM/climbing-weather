@@ -1,6 +1,6 @@
 function LocationInput({ handleChange }) {
     return (
-        <div>
+        <div hidden={true}>
             <label htmlFor="i-lat">Latitude: </label>
             <input
                 id='i-lat'

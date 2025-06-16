@@ -1,0 +1,14 @@
+.welcome-text {
+    /* width: 680px; */
+    padding: 30px 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 30px;
+    color: var(--light-background);
+    text-align: center;
+}
+
+.welcome-text h1 span {
+    color: var(--primary-darker);
+}

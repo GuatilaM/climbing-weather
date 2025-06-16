@@ -2,11 +2,16 @@ import { useState } from "react";
 import Autocomplete from "./autocomplete";
 import LocationInput from "./location-input";
 
-function ClimateForm({ handleResponse }) {
+function ClimateForm({ 
+    handleForecastResponse, 
+    handleWeatherResponse, handleSuggestionActive 
+}) {
     const [coordinates, setCoordinates] = useState({
         latitude: '',
         longitude: ''
     });
+
+    const apiKey = '';
 
     function handleSelected(city) {
         setCoordinates({
@@ -18,7 +23,8 @@ function ClimateForm({ handleResponse }) {
     function handleSubmit(event) {
         // Don't submit yet
         event.preventDefault();
-        getClimate();
+        getForecast();
+        getWeather();
     }
 
     function updateCoordinates(event, name) {
@@ -36,7 +42,7 @@ function ClimateForm({ handleResponse }) {
         }
     }
 
-    async function getClimate() {
+    async function getForecast() {
         let latitude = coordinates.latitude;
         let longitude = coordinates.longitude;
 
@@ -45,33 +51,58 @@ function ClimateForm({ handleResponse }) {
             longitude = '-74.0836';
         }
 
-        const apiKey = '';
         const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKey}`;
         const options = {
             mode: 'cors'
         }
 
-        const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKey}`;
-
         try {
             const response = await fetch(forecastUrl, options);
-            const climate = await response.json();
-            if (climate.cod !== '200') {
-                throw new Error(climate.message);
+            const forecast = await response.json();
+            if (forecast.cod !== '200') {
+                throw new Error(forecast.message);
             } else {
-                console.log(climate);
-                handleResponse(climate);
+                console.log(forecast);
+                handleForecastResponse(forecast);
             }
         } catch (error) {
             console.log(error);
         }
     }
 
+    async function getWeather() {
+        let latitude = coordinates.latitude;
+        let longitude = coordinates.longitude;
+
+        if (latitude === '' || longitude === ''){
+            latitude = '4.6535';
+            longitude = '-74.0836';
+        }
+
+        const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKey}`;
+        const options = {
+            mode: 'cors'
+        }
+
+        try {
+            const response = await fetch(weatherUrl, options);
+            const weather = await response.json();
+            if (weather.cod !== 200){
+                throw new Error(weather.message);
+            } else {
+                console.log(weather);
+                handleWeatherResponse(weather);
+            }
+        } catch (error){
+            console.log(error);
+        }
+    }
+
     return (
         <form action="" onSubmit={handleSubmit} >
-            <Autocomplete onSelected={handleSelected} />
+            <Autocomplete onSelected={handleSelected} handleSuggestionListActive={handleSuggestionActive} />
             <LocationInput handleChange={updateCoordinates} />
-            <button type='submit'>Search</button>
+            <button type='submit' hidden={true}>Search</button>
         </form>
     );
 }

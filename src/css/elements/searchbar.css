@@ -1,0 +1,43 @@
+.searchbar {
+    width: 484px;
+    border-radius: 5px;
+    background-color: var(--light-background);
+    padding: 21px 20px;
+    display: flex;
+    gap: 15px;
+}
+
+.searchbar input {
+    width: 100%;
+    border: none;
+    background-color: inherit;
+}
+
+.searchbar input:focus {
+    outline: none;
+}
+
+::placeholder {
+    color: var(--text-primary-light);
+    opacity: 1;
+}
+
+/* When suggestions list is active, merge borders into it */
+.searchbar-sl {
+    width: 484px;
+    border-radius: 5px 5px 0px 0px;
+    background-color: var(--light-background);
+    padding: 21px 20px;
+    display: flex;
+    gap: 15px;   
+}
+
+.searchbar-sl input {
+    width: 100%;
+    border: none;
+    background-color: inherit;
+}
+
+.searchbar-sl input:focus {
+    outline: none;
+}

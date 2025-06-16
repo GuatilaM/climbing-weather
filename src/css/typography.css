@@ -1,0 +1,47 @@
+:root {
+    /* Text-size styles */
+    /* base size: heading-4 (20px) */
+    --heading-1: 2rem;
+    --heading-2: 1.6rem;
+    --heading-3: 1.2rem;
+    --heading-4: 1rem;
+    --heading-5: 0.8rem;
+    --regular: 400;
+    --medium: 500;
+}
+
+.heading-1-medium,
+.heading-1-regular,
+.heading-2,
+.heading-3, 
+.heading-4,
+.heading-5 {
+    font-style: normal;
+	text-decoration: none;
+	text-transform: none;
+}
+
+.heading-1-medium {
+	font-size: var(--heading-1);
+	font-weight: var(--medium);
+}
+.heading-1-regular {
+	font-size: var(--heading-1);
+	font-weight: var(--regular);
+}
+.heading-2 {
+	font-size: var(--heading-2);
+	font-weight: var(--regular);
+}
+.heading-3 {
+	font-size: var(--heading-3);
+	font-weight: var(--regular);
+}
+.heading-4 {
+	font-size: var(--heading-4);
+	font-weight: var(--regular);
+}
+.heading-5 {
+	font-size: var(--heading-5);
+	font-weight: var(--regular);
+}

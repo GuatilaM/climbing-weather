@@ -1,17 +1,20 @@
-function SuggestionsList({ state, handleClick }) {
+function SuggestionsList({ state, handleClick, handleMouseEnter }) {
     if (state.showSuggestions && state.userInput) {
         if (state.filteredSuggestions.length) {
             return (
-                <ul>
+                <ul className="suggestions-list">
                     {state.filteredSuggestions.map((suggestion, index) => {
-                        let liClass = 'li-inactive';
+                        let liClass = 'sl-inactive';
                         if (index === state.activeSuggestion) {
-                            liClass = 'li-active';
+                            liClass = 'sl-active';
                         }
+                        liClass += ' heading-4';  
                         return (
                             <li
                                 key={index}
+                                id={index}
                                 className={liClass}
+                                onMouseEnter={handleMouseEnter}
                                 onClick={handleClick}
                             >{suggestion.name}</li>
                         );
@@ -19,6 +22,8 @@ function SuggestionsList({ state, handleClick }) {
                 </ul>
             );
         }
+    } else {
+        return (<></>);
     }
 }
 

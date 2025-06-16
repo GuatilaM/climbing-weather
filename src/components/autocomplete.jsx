@@ -1,9 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
-import './autocomplete.css';
 import TextInput from "./text-input";
 import SuggestionsList from "./suggestions-list"
 
-function Autocomplete({ onSelected }) {
+function Autocomplete({ onSelected, handleSuggestionListActive }) {
 
     const [state, setState] = useState({
         activeSuggestion: 0,
@@ -16,6 +15,9 @@ function Autocomplete({ onSelected }) {
     const [selected, setSelected] = useState(false);
 
     function updateUserInput(event) {
+        if (event.target.value === ''){
+            handleSuggestionListActive(false);
+        }
         setState({
             ...state,
             userInput: event.target.value
@@ -71,6 +73,7 @@ function Autocomplete({ onSelected }) {
                 });
             });
             //   updateSuggestions(cityInput, names);
+            handleSuggestionListActive(true);
             setState({
                 ...state,
                 activeSuggestion: 0,
@@ -80,7 +83,7 @@ function Autocomplete({ onSelected }) {
         } catch (error) {
             console.error('Something went wrong...', error);
         }
-    }, [state]);
+    }, [state, handleSuggestionListActive]);
 
     // Make calls to GeoDB API on debounced input change
     useEffect(() => {
@@ -146,14 +149,28 @@ function Autocomplete({ onSelected }) {
         }
     }
 
+    function updateMouseEnter(event){
+        // handles hovering over a suggestion
+        const targetId = parseInt(event.target.attributes.id.value, 10);
+        setState({
+            ...state,
+            activeSuggestion: targetId 
+        });
+    }
+
     return (
         <div>
             <TextInput
                 handleChange={updateUserInput}
                 handleKeyDown={updateActiveSuggestion}
                 inputVal={state.userInput}
+                state={state}
             />
-            <SuggestionsList state={state} handleClick={updateInput} />
+            <SuggestionsList 
+                state={state} 
+                handleClick={updateInput} 
+                handleMouseEnter={updateMouseEnter}
+            />
         </div>
     );
 }
